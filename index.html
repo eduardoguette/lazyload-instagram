@@ -83,10 +83,6 @@
       img.loaded {
         opacity: 1;
       }
-      footer {
-        position: absolute;
-        bottom: 1rem; 
-      }
       .title{
         text-align: center;
         margin-bottom: 2rem;
@@ -112,15 +108,11 @@
         <small>Lorem Picsum</small>
       </article>
     </section>
-    <footer>Eduardo Guette</footer>
     <script>
       const img = document.querySelector("img");
       const small = document.querySelector("small");
       const h1 = document.querySelector(" article h1");
       const loader = document.querySelector(".loader");
-      img.onload = () => {
-        console.log("done");
-      };
       setTimeout(() => {
         small.classList.add("loaded");
         h1.classList.add("loaded");
