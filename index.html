@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="preload" as="image" href="./image.jpg" />
+    <link rel="preload" as="image" href="./loader.gif" />
+    <meta name="description" content="Lazyload instagram" />
+
+    <title>Lazy Instagram</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
+      :root {
+        font-size: 16px;
+        --font-basic: Inter, sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: var(--font-basic);
+      }
+      body {
+        display: grid;
+        place-items: center;
+        height: 100vh;
+        padding: 10px;
+      }
+      .card {
+        padding: 1.5rem;
+        border-radius: 5px;
+        box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.2);
+      }
+      h1 {
+        margin-block: 0.5rem;
+        position: relative;
+        width: max-content;
+        font-size: clamp(1.2rem, 5vw, 2rem);
+      }
+      small {
+        display: block;
+        margin-block: 0.4rem;
+        position: relative;
+        width: max-content;
+      }
+      small:before,
+      article h1:before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: url("./loader.gif") center center no-repeat;
+        background-size: cover;
+        border-radius: 3px;
+      }
+      small.loaded:before,
+      article h1.loaded:before {
+        opacity: 0;
+      }
+      picture {
+        position: relative;
+        display: block;
+      }
+      .loader {
+        width: 100%;
+        height: 100%;
+        background: url(./loader.gif) center center no-repeat;
+        background-size: cover;
+        position: absolute;
+        z-index: 1;
+        border-radius: 3px;
+      }
+      img {
+        transition: all ease-in-out 0.6s;
+        opacity: 0;
+        width: 100%;
+        height: auto;
+        max-width: 400px;
+      }
+      .loader.loaded {
+        opacity: 0;
+      }
+      img.loaded {
+        opacity: 1;
+      }
+      footer {
+        position: absolute;
+        bottom: 1rem; 
+      }
+      .title{
+        text-align: center;
+        margin-bottom: 2rem;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <h1 class="title">Lazyload Instagram</h1>
+      <article class="card">
+        <picture>
+          <div class="loader"></div>
+          <img
+            src="image.jpg"
+            alt="img-example"
+            width="292"
+            height="438"
+            title="image de ejemplo"
+          />
+        </picture>
+        <h1>Imagen Example</h1>
+        <small>Lorem Picsum</small>
+      </article>
+    </section>
+    <footer>Eduardo Guette</footer>
+    <script>
+      const img = document.querySelector("img");
+      const small = document.querySelector("small");
+      const h1 = document.querySelector(" article h1");
+      const loader = document.querySelector(".loader");
+      img.onload = () => {
+        console.log("done");
+      };
+      setTimeout(() => {
+        small.classList.add("loaded");
+        h1.classList.add("loaded");
+        img.classList.add("loaded");
+        loader.classList.add("loaded");
+      }, 2000);
+    </script>
+  </body>
+</html>
